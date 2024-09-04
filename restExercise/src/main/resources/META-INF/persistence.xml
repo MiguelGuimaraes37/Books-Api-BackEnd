@@ -1,0 +1,26 @@
+<!-- /META-INF/persistence.xml -->
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+    <persistence-unit name="oznightmanager" transaction-type="RESOURCE_LOCAL">
+        <!-- provider element declares the class that provides the initial factory
+            for creating an EntityManager instance -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/oznightmanager?useSSL=false&amp;serverTimezone=UTC"/>
+            <!-- Dialect is required to let Hibernate know the Database Type, MySQL, Oracle etc
+			Hibernate 4 automatically figure out Dialect from Database Connection Metadata -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect" />
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.import_files" value="META-INF/questions.sql,META-INF/answer.sql,META-INF/user.sql,META-INF/session.sql,META-INF/group.sql,META-INF/event.sql"/>
+
+
+        </properties>
+    </persistence-unit>
+</persistence>
