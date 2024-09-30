@@ -24,8 +24,6 @@ public class BookDtoToBook implements Converter<BookDto, Book> {
         book.setId(bookDto.getId());
         book.setTitle(bookDto.getTitle());
         book.setAuthor(bookDto.getAuthor());
-        book.setISBN(bookDto.getISBN());
-        book.setPublishedDate(bookDto.getPublishedDate());
         book.setPrice(bookDto.getPrice());
 
         return book;

@@ -1,6 +1,5 @@
 package io.deli.home.dtos;
 
-import java.util.Date;
 
 public class BookDto {
 
@@ -9,10 +8,6 @@ public class BookDto {
     private String title;
 
     private String author;
-
-    private long ISBN;
-
-    private Date publishedDate;
 
     private int price;
 
@@ -38,22 +33,6 @@ public class BookDto {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public long getISBN() {
-        return ISBN;
-    }
-
-    public void setISBN(long ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public Date getPublishedDate() {
-        return publishedDate;
-    }
-
-    public void setPublishedDate(Date publishedDate) {
-        this.publishedDate = publishedDate;
     }
 
     public int getPrice() {
