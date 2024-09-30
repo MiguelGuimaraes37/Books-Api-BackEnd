@@ -12,5 +12,5 @@ With the main objective of displaying books according to each end point such as:
 
 ● DELETE /api/books/{id} - Delete a book by ID.
 
-All of endpoints are avalaible and working!
+All endpoints are avalaible and working!
 
