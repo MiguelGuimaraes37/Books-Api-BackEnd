@@ -12,9 +12,5 @@ With the main objective of displaying books according to each end point such as:
 
 ● DELETE /api/books/{id} - Delete a book by ID.
 
-I managed to do the part in java where I have two end points, GET /api/books and GET /api/books/{id}, I could do the rest of the endpoints but I only did these to test.
-
-I've also made DTOS, Entity (Book), Services, Converters, Persistence and some xml files but they're not working and that's where my problem lies and why I haven't advanced any further in the project.
-
-I can establish a connection with mysql, but it doesn't recognize my database.
+All of endpoints are avalaible and working!
 
