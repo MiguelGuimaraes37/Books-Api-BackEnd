@@ -7,8 +7,10 @@ import java.util.List;
 public interface BookService {
     Book get(Integer id);
 
-    void delete(Book user);
+    void delete(Integer id);
 
     List<Book> list();
+
+    Book createOrUpdate(Book book);
 
 }

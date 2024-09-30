@@ -7,7 +7,9 @@ import io.deli.home.model.Book;
 import io.deli.home.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +41,6 @@ public class BookRestController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<BookDto> showBook(@PathVariable Integer id) {
-
         Book book = bookService.get(id);
 
         if (book == null) {
@@ -51,11 +52,61 @@ public class BookRestController {
 
     @RequestMapping(method = RequestMethod.GET, path = {"/", ""})
     public ResponseEntity<List<BookDto>> listBooks() {
-
         List<BookDto> bookDtos = bookService.list().stream()
                 .map(book -> bookToBookDto.convert(book))
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(bookDtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            path = "/delete/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<HttpStatus> deleteBookById(@PathVariable Integer id) {
+        Book book = bookService.get(id);
+
+        if(book == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        bookService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.PUT,
+            path = "edit/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+
+    )
+    public ResponseEntity<BookDto> editBookById(@RequestBody BookDto bookDto, BindingResult bindingResult,
+                                                        @PathVariable Integer id){
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        bookDto.setId(id);
+
+        Book book = bookService.createOrUpdate(bookDtoToBook.convert(bookDto));
+
+        return new ResponseEntity<>(bookToBookDto.convert(book), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "/create",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Book book = bookService.createOrUpdate(bookDtoToBook.convert(bookDto));
+
+        return new ResponseEntity<>(bookToBookDto.convert(book), HttpStatus.OK);
     }
 }

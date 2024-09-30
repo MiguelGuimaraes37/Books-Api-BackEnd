@@ -27,13 +27,18 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void delete(Book book) {
-        bookDao.delete(book);
+    public void delete(Integer id) {
+        bookDao.delete(id);
     }
 
     @Override
     public List<Book> list() {
         return bookDao.findAll();
+    }
+
+    @Transactional
+    public Book createOrUpdate(Book book) {
+        return bookDao.saveOrUpdate(book);
     }
 
 }

@@ -40,8 +40,8 @@ public abstract class GenericJpaDao<T extends Model> implements Dao<T> {
     }
 
     @Override
-    public void delete(T obj) {
-        em.remove(obj);
+    public void delete(Integer id) {
+        em.remove(em.find(modelType, id));
     }
 
 }

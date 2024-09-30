@@ -1,6 +1,7 @@
 package io.deli.home.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "book")
@@ -13,6 +14,10 @@ public class Book implements Model {
     private String title;
 
     private String author;
+
+    private int ISBN;
+
+    private String publishedDate;
 
     private int price;
 
@@ -52,5 +57,21 @@ public class Book implements Model {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(int ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
     }
 }

@@ -20,5 +20,5 @@ public interface Dao<T extends Model> {
 
     T saveOrUpdate(T modelObject);
 
-    void delete(T obj);
+    void delete(Integer id);
 }
