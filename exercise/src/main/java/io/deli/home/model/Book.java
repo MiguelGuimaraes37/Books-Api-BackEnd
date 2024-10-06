@@ -15,7 +15,7 @@ public class Book implements Model {
 
     private String author;
 
-    private int ISBN;
+    private String ISBN;
 
     private String publishedDate;
 
@@ -59,11 +59,11 @@ public class Book implements Model {
         this.price = price;
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
