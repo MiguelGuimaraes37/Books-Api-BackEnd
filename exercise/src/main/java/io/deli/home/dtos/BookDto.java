@@ -1,6 +1,5 @@
 package io.deli.home.dtos;
 
-
 public class BookDto {
 
     private Integer id;

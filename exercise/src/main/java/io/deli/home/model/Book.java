@@ -1,7 +1,6 @@
 package io.deli.home.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "book")
