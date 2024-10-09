@@ -39,8 +39,8 @@ public class BookRestController {
         this.bookToBookDto = bookToBookDto;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<BookDto> showBook(@PathVariable Integer id) {
+    @RequestMapping(method = RequestMethod.GET, path = "id/{id}")
+    public ResponseEntity<BookDto> getBookById(@PathVariable Integer id) {
         Book book = bookService.get(id);
 
         if (book == null) {
@@ -51,7 +51,7 @@ public class BookRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = {"/", ""})
-    public ResponseEntity<List<BookDto>> listBooks() {
+    public ResponseEntity<List<BookDto>> getBooks() {
         List<BookDto> bookDtos = bookService.list().stream()
                 .map(book -> bookToBookDto.convert(book))
                 .collect(Collectors.toList());
@@ -82,7 +82,7 @@ public class BookRestController {
             produces = MediaType.APPLICATION_JSON_VALUE
 
     )
-    public ResponseEntity<BookDto> editBookById(@RequestBody BookDto bookDto, BindingResult bindingResult,
+    public ResponseEntity<BookDto> updateBookById(@RequestBody BookDto bookDto, BindingResult bindingResult,
                                                         @PathVariable Integer id){
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -106,6 +106,28 @@ public class BookRestController {
         }
 
         Book book = bookService.createOrUpdate(bookDtoToBook.convert(bookDto));
+
+        return new ResponseEntity<>(bookToBookDto.convert(book), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "isbn/{isbn}")
+    public ResponseEntity<BookDto> getBookByIsbn(@PathVariable String isbn) {
+        Book book = bookService.getBookByISBN(isbn);
+
+        if (book == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(bookToBookDto.convert(book), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "book/{isbn}/{id}")
+    public ResponseEntity<BookDto> getBookByIsbnWithoutId(@PathVariable String isbn, @PathVariable Integer id) {
+        Book book = bookService.getBookWithoutId(id, isbn);
+
+        if (book == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         return new ResponseEntity<>(bookToBookDto.convert(book), HttpStatus.OK);
     }

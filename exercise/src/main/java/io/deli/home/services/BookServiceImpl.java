@@ -24,6 +24,15 @@ public class BookServiceImpl implements BookService {
         return bookDao.findById(id);
     }
 
+    public Book getBookByISBN(String ISBN) {
+        return bookDao.findByISBN(ISBN);
+    }
+
+    @Override
+    public Book getBookWithoutId(Integer id, String ISBN) {
+       return bookDao.findByISBNWithoutId(id, ISBN);
+    }
+
     @Override
     @Transactional
     public void delete(Integer id) {
